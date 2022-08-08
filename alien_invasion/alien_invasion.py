@@ -6,6 +6,7 @@ import game_functions as gf
 from pygame.sprite import Group
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 def run_game():
     #Inicializa o jogo e cria um objeto para a tela
@@ -20,6 +21,7 @@ def run_game():
 
     # Cria uma instância para armazenar dados estatísticos do jogo 
     stats = GameStats(ai_settings)
+    sb=Scoreboard(ai_settings,screen,stats)
     #cria uma espaçonave
     ship=Ship(ai_settings,screen)
     # Cria um grupo no qual serão armazenados os projéteis
@@ -32,17 +34,17 @@ def run_game():
     #inicializa o laço principal do jogo
     while True:
         #observa os eventos de reclado e mouse
-        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets)
+        gf.check_events(ai_settings, screen, stats,sb, play_button, ship, aliens, bullets)
         
         
         #verifica se o jogo está ativo
         if stats.game_active:
             ship.update()
             #atualiza a posição dos projéteis 
-            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
+            gf.update_aliens(ai_settings, stats, screen,sb,ship, aliens, bullets)
            
-        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)  
+        gf.update_screen(ai_settings, screen, stats,sb, ship, aliens, bullets, play_button)  
 
 
 run_game()        
