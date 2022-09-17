@@ -1,4 +1,4 @@
-# Projetinhos-em-Pyhton
+# Projetos-em-Pyhton
 
 
 Mude para a branch Master para visualizar
